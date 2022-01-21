@@ -1,0 +1,13 @@
+  .navbar-container {
+  height: 114px;
+  background: linear-gradient(var(--gradient-bg-color-1), var(--gradient-bg-color-2));
+  border: 1px solid rgba(0, 21, 41, 0.12);
+}
+
+#logo {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 28px;
+  color: var(--font-color-primary);
+  margin-inline-start: 9.375rem;
+  margin-block-start: 44px;
+}
