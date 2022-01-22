@@ -7,10 +7,14 @@
     --gradient-bg-color-1: #ececec;
     --gradient-bg-color-2: #fff;
     --font-color-primary: #3b3b3b;
-    --font-color-primary: #3b3b3b;
+    --font-color-secondary: #343434;
+    --bg-primary: #fff;
+    --border-color-primary: #2e2e2e;
     --button-color-primary: #606060;
     --button-bg-primary: #fcfcfc;
     --button-color-hover-primary: #1797ff;
+    --card-border-primary: #979797;
+    --card-bg-secondary: #60606023;
   }
 
 body {
