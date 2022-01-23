@@ -1,4 +1,8 @@
-.content-container {
+  .favorites-container{
+      margin-inline: 7rem;
+  }
+
+  .favorites-grid {
   margin-block-start: 2.375rem;
   display: grid;
   column-gap: 2.5rem;
