@@ -6,6 +6,7 @@ import './App.css';
 import Navbar from './Components/navbarFolder/navbar';
 // imports pages
 import HomePage from "./Pages/homeFolder/homePage";
+import Favorites from "./Pages/favoritesFolder/favorites";
 
 const App = () => {
   return (
@@ -13,7 +14,8 @@ const App = () => {
       <Navbar />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}/>
+          <Route path="" element={<HomePage />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
     </div>
