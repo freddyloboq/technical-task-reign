@@ -2,7 +2,6 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       allContent: [],
-      favorites: [],
     },
     actions: {
       getAllContent: (url) => {
@@ -12,12 +11,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => setStore({ allContent: data }));
       },
-      addFavorites: (heart, item) => {
+
+      deleteFavorite: (key, item) => {
         const store = getStore();
+        let filtered = store.favorites.filter((item) => item !== key);
         setStore({
-          favorites: [...store.favorites, { heart: heart, item: item }],
+          favorites: [filtered],
         });
-      }
+      },
     },
   };
 };

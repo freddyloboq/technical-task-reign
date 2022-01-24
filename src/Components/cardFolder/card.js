@@ -1,68 +1,44 @@
 // imports
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./card.css";
-import { Context } from "../../store/appContext";
 import { IconHeart, IconHeartLine, IconClock } from "../../Assets/icons";
 
 const Card = (props) => {
-  const { item, heart } = props;
-  const { store, actions } = useContext(Context);
+  const { objId, item, addFaves, findIndex } = props;
   const [selectFavorite, setSelectFavorite] = useState(false);
-  console.log(props);
-
-  const onClick = (item) => {
-    setSelectFavorite(!selectFavorite);
-  };
+  const [faves, setFaves] = useState([]);
 
   useEffect(() => {
-    if (selectFavorite === true) {
-      actions.addFavorites(selectFavorite, item);
+    const getFaves = localStorage.getItem("faves");
+    if (getFaves === null) {
+      localStorage.setItem("faves", JSON.stringify(faves));
+    } else {
+      setFaves(JSON.parse(getFaves));
     }
-  }, [selectFavorite]);
-
-  console.log(store.favorites);
+  }, []);
 
   return (
     <>
-      {heart ? (
-        <div className="card-container">
-          <header className="card-header">
-            <p className="card-text-time">
-              <IconClock size={"16"} color={"#606060"} /> 3 horas ago by{" "}
-              {item.author}
-            </p>
-            <p className="card-text-content">{item.story_title}</p>
-          </header>
-          <div className="heart-icon">
-            <span
-              onClick={() => {
-                onClick(item);
-              }}
-            >
-              {heart ? <IconHeart /> : <IconHeartLine />}
-            </span>
-          </div>
+      <div className="card-container">
+        <header className="card-header">
+          <p className="card-text-time">
+            <IconClock size={"16"} color={"#606060"} /> 3 horas ago by{" "}
+            {item?.author}
+          </p>
+          <p className="card-text-content">{item?.story_title}</p>
+        </header>
+        <div className="heart-icon">
+          <span
+            onClick={() => {
+              addFaves(item);
+              setSelectFavorite(!selectFavorite);
+              // actions.addFavorites(selectFavorite, item);
+            }}
+          >
+            {findIndex ? <IconHeart /> : <IconHeartLine />}
+          </span>
         </div>
-      ) : (
-        <div className="card-container">
-          <header className="card-header">
-            <p className="card-text-time">
-              <IconClock size={"16"} color={"#606060"} /> 3 horas ago by{" "}
-              {item.author}
-            </p>
-            <p className="card-text-content">{item.story_title}</p>
-          </header>
-          <div className="heart-icon">
-            <span
-              onClick={() => {
-                onClick(item);
-              }}
-            >
-              {selectFavorite ? <IconHeart /> : <IconHeartLine />}
-            </span>
-          </div>
-        </div>
-      )}
+      </div>
     </>
   );
 };
