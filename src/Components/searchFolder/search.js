@@ -4,25 +4,34 @@ import "./search.css";
 
 const Search = () => {
   const { store, actions } = useContext(Context);
-  const [optionSelected, setOptionSelected] = useState(null);
-  const [localSelect, setLocalSelect] = useState();
+  const [changeFilter, setChangeFilter] = useState("");
+  const [optionSelected, setOptionSelected] = useState("");
 
   useEffect(() => {
-    localStorage.setItem("filterSelected", optionSelected);
-  }, [optionSelected]);
-
-  useEffect(() => {
-    if (localStorage.getItem("filterSelected")) {
-      setLocalSelect(localStorage.getItem("filterSelected"));
+    const getSelectFilter = localStorage.getItem("getSelectFilter");
+    if (getSelectFilter === null) {
+      localStorage.setItem("getSelectFilter", optionSelected);
+    } else {
+      setOptionSelected(getSelectFilter);
     }
-  }, [optionSelected]);
+  }, []);
 
   const handleChange = (e) => {
-    setOptionSelected(e.target.value);
+    e.preventDefault();
+    setChangeFilter(e.target.value);
+    localStorage.setItem("getSelectFilter", e.target.value);
+
     actions.getAllContent(
-      `https://hn.algolia.com/api/v1/search_by_date?query=${localSelect}&page=0`
+      `https://hn.algolia.com/api/v1/search_by_date?query=${optionSelected}&page=0`
     );
   };
+
+  const filterOptions = [
+    { value: "", Name: "Select your news" },
+    { value: "angular", Name: "Angular" },
+    { value: "reactjs", Name: "React" },
+    { value: "vuejs", Name: "Vuejs" },
+  ];
 
   return (
     <header className="search-container">
@@ -33,12 +42,16 @@ const Search = () => {
         form="carform"
         onChange={(e) => handleChange(e)}
       >
-        <option value="">Select your news</option>
-        <option value="angular">Angular</option>
-        <option value="reactjs">React</option>
-        <option value="vuejs">Vuejs</option>
+        {
+          filterOptions.map((item, index) => {
+          return (
+            <option key={index} value={item.value} selected="selected">
+              {item.Name}
+            </option>
+          );
+        })
+        }
       </select>
-      {/* <input type="select"placeholder="Search..." /> */}
     </header>
   );
 };
