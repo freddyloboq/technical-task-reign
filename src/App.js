@@ -6,17 +6,18 @@ import './App.css';
 import Navbar from './Components/navbarFolder/navbar';
 // imports pages
 import HomePage from "./Pages/homeFolder/homePage";
+import Favorites from "./Pages/favoritesFolder/favorites";
 
 const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
       <Navbar />
+      <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<HomePage />}/>
+          <Route path="" element={<HomePage />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
-      ,
     </div>
   );
 }

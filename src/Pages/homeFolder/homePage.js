@@ -1,15 +1,16 @@
 import SelectButtonViews from "../../Components/selectButtonFolder/selectButton";
 import Search from "../../Components/searchFolder/search";
 import AllContent from "../../Components/allContentFolder/allContent";
+import "./homePage.css";
 
-const HomoPage = () => {
+const HomePage = () => {
   return (
-    <div>
+    <div className="home-container">
       <SelectButtonViews />
-      {/* <Search />
-      <AllContent /> */}
+      <Search />
+      <AllContent />
     </div>
-  );
+  )
 };
 
-export default HomoPage;
+export default HomePage;
