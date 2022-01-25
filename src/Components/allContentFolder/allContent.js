@@ -8,24 +8,22 @@ import React, {
 } from "react";
 import { Context } from "../../store/appContext";
 import Card from "../cardFolder/card";
-import { UseInfinityScroll } from "../useInfinityScroll/useInfinityScroll";
+import {UseInfinityScroll} from "../useInfinityScroll/useInfinityScroll";
 import "./allContent.css";
 
 const AllContent = () => {
-  const { store, actions } = useContext(Context);
+  const { store,actions } = useContext(Context);
   const [faves, setFaves] = useState([]);
   const [query, setQuery] = useState("");
   const [pageNumber, setPageNumber] = useState(0);
 
   useEffect(() => {
     setQuery(store.filterSelected);
-    console.log("store.filterSelected :>> ", store.filterSelected);
-    console.log("query :>> ", query);
   }, [store.filterSelected, query]);
 
   const { favesInfinity, hasMore, loading } = UseInfinityScroll(
     query,
-    pageNumber
+    pageNumber,
   );
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const AllContent = () => {
       setFaves([...faves, item]);
       localStorage.setItem("faves", JSON.stringify([...faves, item]));
     }
-    if (findId) {
+     if (findId) {
       const filter = faves.filter((itemA) => itemA.objectID !== item.objectID);
       setFaves(filter);
       localStorage.setItem("faves", JSON.stringify(filter));
