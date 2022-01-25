@@ -6,6 +6,7 @@
   :root {
     --gradient-bg-color-1: #ececec;
     --gradient-bg-color-2: #fff;
+    --unique-bg-color: #fcfcfc;
     --font-color-primary: #3b3b3b;
     --font-color-secondary: #343434;
     --bg-primary: #fff;
@@ -15,10 +16,13 @@
     --button-color-hover-primary: #1797ff;
     --card-border-primary: #979797;
     --card-bg-secondary: #60606023;
+    --select-option-primary: #fff;
+    --select-option-secondary: #eaeaea;
   }
 
 body {
   margin: 0;
+  background: var(--unique-bg-color);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

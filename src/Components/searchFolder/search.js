@@ -49,10 +49,7 @@ const Search = () => {
         {
           filterOptions.map((item, index) => {
           return (
-            <option
-              key={index}
-              value={item.value}
-            >
+            <option key={index} value={item.value}>
               {item.Name}
             </option>
           );
