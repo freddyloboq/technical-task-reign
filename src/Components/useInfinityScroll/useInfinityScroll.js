@@ -11,9 +11,11 @@ export const UseInfinityScroll = (query, pageNumber) => {
 
   useEffect(() => {
     setFavesInfinity([]);
-  }, []);
+  }, [query]);
 
   useEffect(() => {
+    console.log("store.filterSelected :>> ", store.filterSelected);
+    console.log("query :>> ", query);
     setLoading(true);
     setError(false);
     fetch(
@@ -31,7 +33,7 @@ export const UseInfinityScroll = (query, pageNumber) => {
         setError(true);
       });
     setLoading(false);
-  }, [query, pageNumber]);
+  }, [query, pageNumber, store.filterSelected]);
 
   return { loading, error, favesInfinity, hasMore };
 };

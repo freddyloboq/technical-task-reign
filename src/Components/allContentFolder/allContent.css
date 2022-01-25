@@ -8,3 +8,30 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 34.375rem), 1fr));
   grid-auto-rows: 5.625rem;
 }
+
+.search-container{
+  margin-block-start: 3.9375rem;
+}
+
+.search-input{
+  width: 15rem;
+  height: 2rem;
+  border: 1px solid var(border-color-primary);
+  border-radius: 4px;
+  padding: 0 1.25rem;
+  font-size: 0.8rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  color: var(--font-color-secondary);
+  background: var(--bg-primary);
+  outline: none;
+  transition: all 1s ease-in-out;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
