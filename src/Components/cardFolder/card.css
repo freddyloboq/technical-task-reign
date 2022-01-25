@@ -7,6 +7,16 @@
   border-radius: 6px;
 }
 
+.card-container:hover{
+  display: grid;
+  grid-template-columns: 90% 10%;
+  grid-auto-rows: 5.625rem;
+  background: #fff;
+  border: 1px solid var(--card-border-primary);
+  border-radius: 6px;
+  opacity: 0.5
+}
+
 .card-header{
   padding:1rem 1.625rem;
 }
@@ -33,6 +43,7 @@ p svg{
   color: #767676;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .heart-icon{

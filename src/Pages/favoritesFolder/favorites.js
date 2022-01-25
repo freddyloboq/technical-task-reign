@@ -1,3 +1,4 @@
+// imports
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../store/appContext";
 import "./favorites.css";
@@ -8,6 +9,7 @@ const Favorites = () => {
   const { store, actions } = useContext(Context);
   const [faves, setFaves] = useState([]);
 
+  //this useEffect save the favorites in localStorage
   useEffect(() => {
     const getFaves = localStorage.getItem("faves");
     if (getFaves === null) {
@@ -17,6 +19,7 @@ const Favorites = () => {
     }
   }, []);
 
+  //function to save and delete favorites
   const addFaves = (item) => {
     const findId = faves.some((itemA) => itemA === item);
     if (!findId) {

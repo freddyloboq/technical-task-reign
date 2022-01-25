@@ -1,12 +1,32 @@
 // imports
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
 import { Context } from "../../store/appContext";
 import Card from "../cardFolder/card";
+import { UseInfinityScroll } from "../useInfinityScroll/useInfinityScroll";
 import "./allContent.css";
 
 const AllContent = () => {
-  const { store,actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [faves, setFaves] = useState([]);
+  const [query, setQuery] = useState("");
+  const [pageNumber, setPageNumber] = useState(0);
+
+  useEffect(() => {
+    setQuery(store.filterSelected);
+    console.log("store.filterSelected :>> ", store.filterSelected);
+    console.log("query :>> ", query);
+  }, [store.filterSelected, query]);
+
+  const { favesInfinity, hasMore, loading } = UseInfinityScroll(
+    query,
+    pageNumber
+  );
 
   useEffect(() => {
     const getFaves = localStorage.getItem("faves");
@@ -23,7 +43,7 @@ const AllContent = () => {
       setFaves([...faves, item]);
       localStorage.setItem("faves", JSON.stringify([...faves, item]));
     }
-     if (findId) {
+    if (findId) {
       const filter = faves.filter((itemA) => itemA.objectID !== item.objectID);
       setFaves(filter);
       localStorage.setItem("faves", JSON.stringify(filter));
@@ -31,18 +51,30 @@ const AllContent = () => {
   };
 
   useEffect(() => {
-    actions.getAllContent(
-      `https://hn.algolia.com/api/v1/search_by_date?query=&page=0`
-    );
+    setPageNumber(0);
   }, []);
+
+  const observer = useRef();
+  const lastItemRef = useCallback(
+    (node) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
 
   return (
     <header className="content-container">
-      {store.allContent.hits?.map((item, index) => {
+      {favesInfinity?.map((item, index) => {
         const findIndex = faves.some(
           (item1) => item1.objectID === item.objectID
         );
-        console.log(item)
         return (
           item.story_title &&
           item.author &&
@@ -54,6 +86,7 @@ const AllContent = () => {
               addFaves={addFaves}
               objId={item.objectID}
               findIndex={findIndex}
+              lastItemRef={lastItemRef}
             />
           )
         );
