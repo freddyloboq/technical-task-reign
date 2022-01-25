@@ -58,3 +58,24 @@ p svg{
   -ms-border-radius: 0 6px 6px 0;
   -o-border-radius: 0 6px 6px 0;
 }
+
+@media (max-width: 600px){
+  .card-container{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-auto-rows: 5.625rem;
+    background: #fff;
+    border: 1px solid var(--card-border-primary);
+    border-radius: 6px;
+  }
+  .card-text-time{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .card-text-content{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

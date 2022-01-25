@@ -14,7 +14,7 @@
 }
 
 .search-input{
-  width: 15rem;
+  max-width: 15rem;
   height: 2rem;
   border: 1px solid var(border-color-primary);
   border-radius: 4px;
